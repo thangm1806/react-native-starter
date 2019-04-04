@@ -9,7 +9,7 @@
 
 import React from 'react';
 import {Component} from 'react'
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, TextInput} from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -20,12 +20,28 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+  constructor(props) {
+    super(props);
+    this.state = {zip: '',
+forecast: {
+main: 'Clouds',
+description: 'few clouds',
+temp: 45.7
+}};
+    this._handleTextChange = this._handleTextChange.bind(this);
+  }
+  
+  _handleTextChange(event) {
+    var test = event.nativeEvent.text;
+    console.log(test);
+    this.setState((state) => { return {zip: test};});
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <Text style={styles.welcome}>You input {this.state.zip}></Text>
+        <TextInput style={styles.input} onSubmitEditing={this._handleTextChange}></TextInput>
       </View>
     );
   }
@@ -48,4 +64,9 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  input: {
+    fontSize: 20,
+    borderWidth: 2,
+    height: 40
+  }
 });
