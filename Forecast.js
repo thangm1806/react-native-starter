@@ -1,18 +1,25 @@
-var React = require("react-native");
-var { StyleSheet, Text, View } = React;
-class Forecast extends React.Component {
-   constructor(props) {
+import React from "react";
+import { Component } from "react";
+import { Platform, StyleSheet, Text, View, TextInput } from "react-native";
+export default class Forecast extends React.Component {
+  constructor(props) {
     super(props);
-   }
-  
+    console.log(props);
+    console.log(this.props);
+  }
   render() {
-    return (<View>
-        <Text style={styles.bigText}>{this.props.main}</Text>
-        <Text style={styles.mainText}>
+    return (
+      <View>
+        <Text>
+          {this.props.main}
+        </Text>
+        <Text>
           Current conditions: {this.props.description}
         </Text>
-        <Text style={styles.bigText}>{this.props.temp}°F</Text>
-      </View>);
+        <Text>
+          {this.props.temp}°F</Text>
+      </View>
+    );
   }
 }
 var styles = StyleSheet.create({

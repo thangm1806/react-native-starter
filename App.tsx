@@ -8,9 +8,8 @@
  */
 
 import React from "react";
-import { Component } from "react";
 import { Platform, StyleSheet, Text, View, TextInput } from "react-native";
-var Forecast = require('./Forecast');
+import Forecast from './Forecast';
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -20,8 +19,9 @@ const instructions = Platform.select({
 });
 
 type Props = {};
-export default class App extends Component<Props> {
+export default class App extends React.Component<Props> {
   constructor(props) {
+    console.log(Forecast);
     super(props);
     this.state = {
       zip: "",
@@ -35,10 +35,9 @@ export default class App extends Component<Props> {
   }
 
   _handleTextChange(event) {
-    var text = event.nativeEvent.text;
-    console.log(test);
+    var zip = event.nativeEvent.text;
     this.setState(state => {
-      return { zip: text };
+      return { zip: zip };
     });
   }
 
@@ -46,11 +45,7 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>You input {this.state.zip}.</Text>
-        <Forecast
-          main={this.state.forecast.main}
-          description={this.state.forecast.description}
-          temp={this.state.forecast.temp}
-        />
+        <Forecast main={this.state.forecast.main} description={this.state.forecast.description} temp={this.state.forecast.temp}/>
         <TextInput
           style={styles.input}
           returnKeyType="go"
